@@ -16,9 +16,9 @@ int main(){
         result=0;
         switch (mode){
             case '+':result=add(a,b);break;
-                case '-':result=subtract(a,b);break;                
-                case '*':result=multiply(a,b);break;     
-                case '/':
+            case '-':result=subtract(a,b);break;                
+            case '*':result=multiply(a,b);break;     
+            case '/':
                 if (b !=0){
                     result=divide(a,b); 
                 }
