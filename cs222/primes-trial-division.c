@@ -1,27 +1,28 @@
+/**************************************
+----Name:Chris-Mensah------------------
+----Course:CS222-Systems-Programming---
+----File:"primes-trial-division.c"-----
+----Description:Count-all-the-prime----
+----numbers-from-2-to-1,000,000-------
+**************************************/
+
 #include <stdio.h>
 
 int main(){
-    int count=0;
-    int i=2;
-    int user_input=0;
-    printf("How many prime #'s? ");
-    scanf("%d",&user_input);
+    int count=1;
 
-    while (count<user_input){
-        int is_prime=1;
-        for (int j=2;(j*j)<=i;j++){
-           if (i%j==0){ 
-            is_prime = 0;
-            break;
+    for (int i=3;i<1000000;i+=2){
+        char is_prime=1;
+        for (int j=3; (j*j)<=i;j+=2){
+            if (i%j==0){
+                is_prime=0;
+                break;
+            }
         }
+        if (is_prime){
+            count++;
+        }     
     }
-    if (is_prime){
-        printf("Prime: %d\n",i);
-        count++;
-    }
-    i++;
-}
-return 0;
-}
-
-
+    printf("Prime count: %d",count);
+    return 0;
+}  
