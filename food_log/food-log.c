@@ -10,6 +10,7 @@ typedef struct expense{
 int main(){
     Expense* expense=malloc(sizeof(Expense));
     char* item_name=malloc(STARTING_SIZE*sizeof(char));
+    expense->item_name=item_name;
     char* file_name=malloc(STARTING_SIZE*sizeof(char));
     printf("File Name: ");
     fgets(file_name,STARTING_SIZE,stdin);
@@ -33,13 +34,14 @@ int main(){
         printf("Enter Item Name: ");
         fgets(expense->item_name,STARTING_SIZE,stdin);
         file_line[strcspn(file_line, "\n")] = 0;
+        expense->item_name[strcspn(expense->item_name, "\n")] = 0;
 
         printf("Enter Item Price: ");
-        scanf("%.2f",&expense->price);
+        scanf("%1f",&expense->price);
         while (getchar() != '\n');
 
         fprintf(file,"%s: ",expense->item_name);
-        fprintf(file,"$%.2f\n",expense->price);
+        fprintf(file,"$%1f\n",expense->price);
 
         }
     fclose(file);
@@ -52,13 +54,18 @@ int main(){
     }
    
     double total_cost=0.0;
-    int i=1;
-    while(fgets(file_line,STARTING_SIZE,file)!=NULL){
-        file_line[strcspn(file_line, "\n")]=0;       
-        total_cost+=expense->price;
+    double temp_price=0.0;
 
-        printf("%s: $%.2f\n",expense->item_name,expense->price);       
-        i++;
+    
+    while(fgets(file_line,STARTING_SIZE,file)!=NULL){
+        char* temp_name=malloc(STARTING_SIZE*sizeof(char));
+        file_line[strcspn(file_line, "\n")]=0;
+        if (sscanf(file_line, "%[^:]: $%lf", temp_name, &temp_price) == 2) { 
+            total_cost += temp_price;
+        }       
+        printf("%s: $%.2f\n",temp_name,temp_price);  
+        free(temp_name);     
+        
     }
     printf("$%.2f\n",total_cost);
 
