@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 #define STARTING_SIZE 100
 
 typedef struct expense{
@@ -23,6 +23,7 @@ int main(){
         free(expense);
         free(file_line);
         free(file_name);
+        return 1;
     }
 
     int item_number=0;
@@ -30,14 +31,14 @@ int main(){
     scanf("%d",&item_number);
     while (getchar() != '\n');
 
-    for (int i=0;i<=item_number;i++){
+    for (int i=0;i<item_number;i++){
         printf("Enter Item Name: ");
         fgets(expense->item_name,STARTING_SIZE,stdin);
         file_line[strcspn(file_line, "\n")] = 0;
         expense->item_name[strcspn(expense->item_name, "\n")] = 0;
 
         printf("Enter Item Price: ");
-        scanf("%1f",&expense->price);
+        scanf("%lf",&expense->price);
         while (getchar() != '\n');
 
         fprintf(file,"%s: ",expense->item_name);
@@ -50,6 +51,7 @@ int main(){
         free(expense);
         free(file_line);
         free(file_name);
+        return 1;
     }
    
     double total_cost=0.0;
@@ -67,9 +69,10 @@ int main(){
     }
     printf("$%.2f\n",total_cost);
 
-    fclose(file);
+
     fclose(file_ptr);
     free(expense);
+    free(item_name);
     free(file_line);
     free(file_name);
     return 0;
