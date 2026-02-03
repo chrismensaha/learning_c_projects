@@ -45,9 +45,8 @@ int main(){
 
         }
     fclose(file);
-    FILE* file_ptr=fopen("expenses.txt","r");
+    FILE* file_ptr=fopen(file_name,"r");
     if (file_ptr==NULL){
-        fclose(file);
         free(expense);
         free(file_line);
         free(file_name);
@@ -64,7 +63,7 @@ int main(){
             printf("%s: $%.2f\n",temp_name,temp_price);  
             total_cost += temp_price;
         }             
-        free(temp_name);            
+        free(temp_name);         
     }
     printf("$%.2f\n",total_cost);
 
