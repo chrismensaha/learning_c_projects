@@ -41,7 +41,7 @@ int main(){
         while (getchar() != '\n');
 
         fprintf(file,"%s: ",expense->item_name);
-        fprintf(file,"$%1f\n",expense->price);
+        fprintf(file,"$%.2f\n",expense->price);
 
         }
     fclose(file);
