@@ -11,5 +11,6 @@ typedef struct password
 } Password;
 
 void password_checker(char* input, Password* result);
+void check_password();
 
 #endif
