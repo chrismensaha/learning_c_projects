@@ -5,19 +5,19 @@
 
 
 
-void password_checker(char* input, Password result){
-    result.is_secure_length=0;
-    result.has_num=0;
-    result.has_upper=0;
+void password_checker(char* input, Password* result){
+    result->is_secure_length=0;
+    result->has_num=0;
+    result->has_upper=0;
     if (strlen(input)>=8){
-        result.is_secure_length=1;
+        result->is_secure_length=1;
     }
     for (int i=0;input[i]!='\0';i++){
         if (input[i]>='0' && input[i]<='9'){ 
-            result.has_num=1;
+            result->has_num=1;
         }
         if (input[i]>='A' && input[i]<='Z'){ 
-            result.has_upper=1;
+            result->has_upper=1;
         }
     }
     }
@@ -38,7 +38,7 @@ void check_password(){
             printf("Enter password to check: "); 
             fgets(input, sizeof(input), stdin); 
             input[strcspn(input, "\n")] = 0;           
-            password_checker(input,password);
+            password_checker(input,&password);
             if (password.is_secure_length==0){printf("Please use a longer password!\n");}
             if (password.has_num==0){printf("Please Include a Number!\n");}
             if (password.has_upper==0){printf("Please Include a Capital Letter!\n");}

@@ -44,8 +44,7 @@ int main(){
     }
 
     fprintf(file,"%s ",student.name);
-    fprintf(file,"%.1f\n",student.grade);
-    
+    fprintf(file,"%.1f\n",student.grade); 
 
     fclose(file);
     FILE* fileptr = fopen(filename,"r");
@@ -65,11 +64,15 @@ int main(){
 
     while(fgets(fileline,STARTING_SIZE,fileptr)!=NULL){
         fileline[strcspn(fileline, "\n")] = 0;       
-        if (sscanf(fileline, "%[^ ] %f", temp_name, &temp_grade) == 2){
+        if (sscanf(fileline, "%[^ ] %lf", temp_name, &temp_grade) == 2){
             if (strcmp(temp_name,name)==0){
-                if (temp_grade>=60.00){
-                    passed=3;
+                if (temp_grade>=60.0){
                     printf("Student: %s Grade: %.1f\n",temp_name,temp_grade); 
+                    passed++;
+                }
+                else {
+                    printf("Student is failing\n"); 
+
                 }
             total++;
             }
@@ -80,12 +83,11 @@ int main(){
         }
         printf("%d of %d Students Passed",passed,total);
     }
-    
-
 
     free(name); 
     free(filename);
     free(temp_name);
     fclose(fileptr);
     return 0;
+
 }
